@@ -11,18 +11,20 @@ module.exports = {
       username: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true
       },
-      firstname: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lastname: {
+      fullname: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true
       },
       category: {
         type: Sequelize.ENUM,
@@ -33,9 +35,6 @@ module.exports = {
           'others'
         ],
         allowNull: false,
-      },
-      bio: {
-        type: Sequelize.STRING
       },
 
       createdAt: {

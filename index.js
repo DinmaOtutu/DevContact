@@ -1,11 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import routes from './server/routes/index';
+
 
 const app = express();
 
-app.use (bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use (bodyParser.urlencoded({ extended: false }));
+app.use('/api', routes);
 
 app.use((res, req, next) => {
 const error = new Error('oops! not found');
@@ -23,7 +25,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.get('*', (req, res) => res.status(200).send({
+app.get('/', (req, res) => res.status(200).send({
   message: 'Welcome! create your profile or checkout out developers',
 }));
 
