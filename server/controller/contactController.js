@@ -19,7 +19,6 @@ class ContactController {
            email,
            category,
        } = req.body;
-       console.log(req.body, '.............')
        if(username.trim() === '' || fullname.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' 
        || email.trim() === '' || category.trim() === '') {
            return res.status(400).json({
@@ -49,9 +48,31 @@ class ContactController {
                message: error.message
            })
        })
+    }
 
-   } 
+   static getContacts(req, res) {
+     Contacts.all().then((contacts) => {
+         if(!contacts) {
+             return res.status(404).json({
+                 message: 'contacts not found'
+             })
+         }
+         const allContacts = contacts.map(contact => ({
+             fullname: contact.fullname,
+             email: contact.email,
+             category: contact.category,
 
-} 
+        }))
+        return res.status(200).json({
+            message: 'All contacts',
+            allContacts
+        })
+   }).catch(error => {
+       res.status(404).json({
+           error: error.message
+       })
+   })
+   }
+ }
 
 export default ContactController;
