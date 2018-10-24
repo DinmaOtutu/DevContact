@@ -1,0 +1,23 @@
+{
+  "name": "node",
+  "version": "10.0.0",
+  "description": "node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DinmaOtutu/DevContact.git"
+  },
+  "keywords": [
+    "dev",
+    "contacts"
+  ],
+  "author": "Dinma Otutu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DinmaOtutu/DevContact/issues"
+  },
+  "homepage": "https://github.com/DinmaOtutu/DevContact#readme"
+}
