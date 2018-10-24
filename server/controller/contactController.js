@@ -12,19 +12,16 @@ class ContactController {
      */
    static createContact(req, res) {
        const {
-           id,
            username,
            password, 
            confirmPassword,
            fullname,
            email,
            category,
-           bio,
-
        } = req.body;
        console.log(req.body, '.............')
        if(username.trim() === '' || fullname.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' 
-       || email.trim() === '' || category.trim() === '' || bio.trim() === '') {
+       || email.trim() === '' || category.trim() === '') {
            return res.status(400).json({
                message: 'please fill in the field(s)'
            })
@@ -34,11 +31,23 @@ class ContactController {
             message: 'password does not match'
         })
        }
-       return res.status(201).json({
-           message: 'you have created a profile'
-       })
        Contacts.create({
-           username, firstname, lastname, email, category,bio
+           username, fullname, email, category, password: hashSync(password, 10)
+       }).then((newUser) => {
+           const user = {
+               fullname: newUser.fullname,
+               email: newUser.email,
+               category: newUser.category
+           }
+           return res.status(201).json({
+               message: 'signed up successfully',
+               user
+               
+           })
+       }).catch((error) => {
+           return res.status(400).json({
+               message: error.message
+           })
        })
 
    } 

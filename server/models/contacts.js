@@ -3,7 +3,10 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'username already exist'
+      },
       validate: {
         notEmpty: { msg: 'username is required' }
       }
@@ -11,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'email already exist'
+      },
       validate: {
         isEmail: { msg: 'email is required' },
       }
@@ -33,7 +39,10 @@ module.exports = (sequelize, DataTypes) => {
       ],
       allowNull: true,
       validate: {
-        notEmpty: { msg: 'category is required' }
+        isIn: {
+          args: [['frontend developer', 'backend developer', 'UI/UX developer',  'others']],
+          msg: 'invalid category'
+         }
       }
     },
 
@@ -43,15 +52,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: { msg: 'passsowrd is required' }
       }
-    },
-
-    bio: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      validate: {
-        notEmpty: { msg: 'bio is required' }
-      }
-
     },
 });
 return Contacts;
