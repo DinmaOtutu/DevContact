@@ -12,11 +12,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      firstname: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lastname: {
+      fullname: {
         type: Sequelize.STRING,
         allowNull: false,
       },
