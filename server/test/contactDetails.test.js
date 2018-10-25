@@ -69,7 +69,7 @@ describe('Contact details of developers', () => {
         expect(res.body.message).to.equal('signed up successfully');
         done();
       });
-  }).timeout(5000);
+  }).timeout(50000);
 
   it('should register a new user', (done) => {
     // HTTP POST -> REGISTER A NEW USER

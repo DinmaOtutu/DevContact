@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+let dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -12,5 +12,3 @@ module.exports = {
     dialect: 'postgres',
   }
 };
-
-// module.exports = config[process.env.NODE_ENV || 'development'];

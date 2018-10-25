@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
+        len: {
+          args: 3,
+          msg: 'fullname cannot be less than 3 charcters'
+        },
         notEmpty: { msg: 'fullname is required' }
       }
     },
@@ -50,7 +54,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        notEmpty: { msg: 'passsowrd is required' }
+        notEmpty: { msg: 'passsowrd is required' },
+     
+
       }
     },
 });
