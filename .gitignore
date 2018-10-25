@@ -19,3 +19,11 @@ coverage
 # Dependency directories
 node_modules/
 coverage/
+
+# Optional REPL history
+.node_repl_history
+
+.nyc_output
+.coveralls.yml
+# Environment
+.env
