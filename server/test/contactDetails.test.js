@@ -57,7 +57,7 @@ describe('Contact details of developers', () => {
       email: 'dinma1@gmail.com',
       category: 'frontend developer'
     };
-    chai.request(app)
+   chai.request(app)
       .post('/api/users')
       .send(userDetails)
       .end((err, res) => {
