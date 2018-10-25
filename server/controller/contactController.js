@@ -10,7 +10,7 @@ class ContactController {
     /**
      * class for creating the contact details
      */
-   static createContact(req, res, next) {
+   static createContact(req, res) {
        const {
            username,
            password, 
@@ -30,16 +30,17 @@ class ContactController {
             message: 'password does not match'
         })
        }
-       Contacts.create({
+      return Contacts.create({
            username, fullname, email, category, password: hashSync(password, 10)
        }).then((newUser) => {
+           //console.log(newUser, '=================')
            const user = {
                id: newUser.id,
                fullname: newUser.fullname,
                email: newUser.email,
                category: newUser.category
            }
-            res.status(201).json({
+            return res.status(201).json({
                message: 'signed up successfully',
                user
                
@@ -53,7 +54,7 @@ class ContactController {
 
    static getContacts(req, res) {
      Contacts.all().then((contacts) => {
-         if(!contacts) {
+         if(contacts.length === 0 ) {
              return res.status(404).json({
                  message: 'contacts not found'
              })
@@ -68,13 +69,9 @@ class ContactController {
         return res.status(200).json({
             message: 'All contacts',
             allContacts
-        })
-   }).catch(error => {
-       res.status(404).json({
-           error: error.message
-       })
-   })
-   }
+        });
+   });
+   };
 
   static deleteContact(req, res) {
       const { id } = req.params;
@@ -91,10 +88,6 @@ class ContactController {
           contact.destroy().then(deletedContact => {
               return res.status(200).json({
                   message: 'contact successfully deleted'
-              })
-          }).catch((error) => {
-              return res.status(400).json({
-                  error: error.message
               })
           })
       })
@@ -133,11 +126,7 @@ class ContactController {
                 message: 'contact updated successfully',
                 user
             })
-        }).catch((error) => {
-            return res.status(400).json({
-                message: error.message
-            })
-        });
+        })
     })}
 
     static singleContact(req, res) {
@@ -162,10 +151,6 @@ class ContactController {
                 message: 'contact found successfully',
                 user
             });
-        }).catch((error) => {
-            return res.status(400).json({
-                message: error.message
-            })
         });
     }
 }

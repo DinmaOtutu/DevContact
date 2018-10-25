@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 const should = chai.should();
 
 describe('Contact details of developers', () => {
-  it('should not register a user with password mismatch', (done) => {
+   it('should not register a user with password mismatch', (done) => {
     // HTTP POST -> DONT REGISTER A NEW USER
     const userDetails = {
       fullname: 'raji Orajiaku',
@@ -50,37 +50,60 @@ describe('Contact details of developers', () => {
   it('should register a new user', (done) => {
     // HTTP POST -> REGISTER A NEW USER
     const userDetails = {
-      fullname: 'Fred Mgbeoma',
-      username: 'dinma',
-      password: 'olufayo',
-      confirmPassword: 'olufayo',
-      email: 'dinma@gmail.com',
+      fullname: 'Amaka Mgbe',
+      username: 'dinma1',
+      password: 'olufayo1',
+      confirmPassword: 'olufayo1',
+      email: 'dinma1@gmail.com',
+      category: 'frontend developer'
+    };
+   chai.request(app)
+      .post('/api/users')
+      .send(userDetails)
+      .end((err, res) => {
+        if(err) done(err);
+
+      expect(res).to.have.status(201);
+        expect(res.body).to.have.property('message')
+        expect(res.body).to.have.property('user')
+        expect(res.body.message).to.equal('signed up successfully');
+        done();
+      });
+  }).timeout(5000);
+
+  it('should register a new user', (done) => {
+    // HTTP POST -> REGISTER A NEW USER
+    const userDetails = {
+      fullname: 'Amaka Mgbe',
+      username: 'dinma1',
+      password: 'olufayo1',
+      confirmPassword: 'olufayo1',
+      email: 'dinma1@gmail.com',
       category: 'frontend developer'
     };
     chai.request(app)
       .post('/api/users')
       .send(userDetails)
       .end((err, res) => {
-        console.log(res, 'here i am bitchhh')
-        res.should.have.property('status',201);
+        if(err) done(err);
+
+      expect(res).to.have.status(400);
         expect(res.body).to.have.property('message')
-        expect(res.body).to.have.property('user')
-        expect(res.body.message).to.equal('signed up successfully');
-        if (err) return done(err);
+        expect(res.body.message).to.equal('username already exist');
+        done();
       });
-      done();
-  });
-  
+  }).timeout(5000);
+
+
   it('should not get a user that does not exist', (done) => {
     // HTTP POST -> DONT GET A USER
     chai.request(app)
-      .get('/api/users/5')
+      .get('/api/users/66')
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body.message).to.equal('contact not found');
-     
+        done();
       });
-      done();
   });
 
   it('should get a user that exist', (done) => {
@@ -90,21 +113,8 @@ describe('Contact details of developers', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.eql('contact found successfully');
-       
+        done();
       });
-      done();
-  });
-
-  it('should not get a users that does not exist', (done) => {
-    // HTTP POST -> DONT GET A USER
-    chai.request(app)
-      .get('/api/users')
-      .end((err, res) => {
-        expect(res.status).to.equal(404);
-        expect(res.body.message).to.equal('contacts not found');
-      
-      });
-      done();
   });
 
   it('should get all users that exist', (done) => {
@@ -113,18 +123,17 @@ describe('Contact details of developers', () => {
       .get('/api/users')
       .end((err, res) => {
         expect(res.status).to.equal(200);
-        expect(res.body.message).to.eql('all contacts');
-       
+        expect(res.body.message).to.eql('All contacts');
+        done();
       });
-      done();
   });
 
-  
-  
+
+
   it('it should not update user details if user doesnt exist', (done) => {
     // HTTP PUT -> DON'T UPDATE A BUSINESS
     chai.request(app)
-      .put('/api/users/5')
+      .put('/api/users/21')
       .send({
         fullname: 'Jeremiah Fredrick',
         username: 'kaka',
@@ -132,13 +141,12 @@ describe('Contact details of developers', () => {
         confirmPassword: 'olufayo',
         email: 'olufayo1@gmail.com',
         category: 'frontend developer'
-       
       })
       .end((err, res) => {
         expect(res.body).to.have.property('message');
         expect(res.status).to.equal(404);
+        done();
       });
-      done();
   });
 
   it('it should update user details', (done) => {
@@ -146,19 +154,19 @@ describe('Contact details of developers', () => {
     chai.request(app)
       .put('/api/users/1')
       .send({
-        fullname: 'Fred Mgbeoma 1',
-        username: 'dinma',
-        password: 'olufayo',
-        confirmPassword: 'olufayo',
-        email: 'dinma@gmail.com',
-        category: 'frontend developer'
+        fullname: 'Fred Mgbeoma1',
+      username: 'dinma',
+      password: 'olufayo',
+      confirmPassword: 'olufayo',
+      email: 'dinma@gmail.com',
+      category: 'frontend developer'
       })
       .end((err, res) => {
         expect(res.body).to.have.property('message')
           .eql('contact updated successfully');
-          expect(res).to.have.status(200);
+        expect(res).to.have.status(200);
+        done();
       });
-      done();
   });
 
   it('should delete a user that exist', (done) => {
@@ -168,23 +176,31 @@ describe('Contact details of developers', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.eql('contact successfully deleted');
-       
+        done();
       });
-      done();
   });
 
   it('should not delete a user that does not exist', (done) => {
     // HTTP POST -> DONT GET A USER
     chai.request(app)
-      .delete('/api/users/5')
+      .delete('/api/users/34')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.message).to.equal('contact not found');
+        done();
+      });
+  });
+
+  it('should not get any contact', (done) => {
+    // HTTP POST -> DONT GET A USER
+    chai.request(app)
+      .get('/api/users')
       .end((err, res) => {
         expect(res.status).to.equal(404);
         expect(res.body.message).to.equal('contacts not found');
-      
+        done();
       });
-      done();
-  });
-
+  }).timeout(5000);
 });
 
 
