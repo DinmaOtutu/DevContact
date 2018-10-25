@@ -14,26 +14,14 @@ class ContactController {
        const {
            username,
            password, 
-           confirmPassword,
            fullname,
            email,
            category,
        } = req.body;
-       if(username.trim() === '' || fullname.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' 
-       || email.trim() === '' || category.trim() === '') {
-           return res.status(400).json({
-               message: 'please fill in the field(s)'
-           })
-       } 
-       if(password !== confirmPassword) {
-        return res.status(400).json({
-            message: 'password does not match'
-        })
-       }
+     
       return Contacts.create({
            username, fullname, email, category, password: hashSync(password, 10)
        }).then((newUser) => {
-           //console.log(newUser, '=================')
            const user = {
                id: newUser.id,
                fullname: newUser.fullname,
@@ -126,7 +114,11 @@ class ContactController {
                 message: 'contact updated successfully',
                 user
             })
-        })
+        }).catch((error) => {
+            return res.status(400).json({
+                message: error.message
+            })
+        });
     })}
 
     static singleContact(req, res) {

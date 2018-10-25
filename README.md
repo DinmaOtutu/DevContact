@@ -2,7 +2,7 @@
 
 
 [![Build Status](https://travis-ci.org/DinmaOtutu/DevContact.svg?branch=develop)](https://travis-ci.org/DinmaOtutu/DevContact)
-[![Coverage Status](https://coveralls.io/repos/github/DinmaOtutu/DevContact/badge.svg?branch=develop)](https://coveralls.io/github/DinmaOtutu/DevContact?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/DinmaOtutu/DevContact/badge.svg?branch=develop&service=github)](https://coveralls.io/github/DinmaOtutu/DevContact?branch=develop)
 
 ## Vision
 Allow CRUD operation for developers where they can create, view, update and delete their contacts.
@@ -19,8 +19,12 @@ Allow CRUD operation for developers where they can create, view, update and dele
 8. Also can choose to use the online database get the URL and add to the .env file
 
 
-##
-API Endpoint: https://localhost:3000/api
+### API Deployment
+API is deployed at [https://developer-contacts.herokuapp.com/](https://developer-contacts.herokuapp.com/)
+
+### Documentation
+Documentation is hosted at [https://ride-my-way-cars.herokuapp.com/api/v1/docs](https://ride-my-way-cars.herokuapp.com/api/v1/docs)
+
 
 # Technologies Used
 - Backend: Node/Express

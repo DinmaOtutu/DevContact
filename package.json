@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "cross-env NODE_ENV=test npm run undo:migrations && npm run migrations",
     "test": "cross-env NODE_ENV=test nyc --reporter=html mocha --require babel-core/register server/test/**/*.test.js --exit && nyc report --timeout 1000000",
-    "start": "nodemon index.js --exec babel-node",
+    "start": "babel-node index.js --exec",
     "undo:migrations": "node_modules/.bin/sequelize db:migrate:undo:all",
     "migrations": "node_modules/.bin/sequelize db:migrate",
     "coverage": "nyc report --reporter=text-lcov | coveralls"

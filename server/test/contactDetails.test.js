@@ -8,7 +8,7 @@ const should = chai.should();
 
 describe('Contact details of developers', () => {
    it('should not register a user with password mismatch', (done) => {
-    // HTTP POST -> DONT REGISTER A NEW USER
+    // HTTP POST -> DONT REGISTER A NEW CONTACT
     const userDetails = {
       fullname: 'raji Orajiaku',
       username: 'Seyih',
@@ -28,7 +28,7 @@ describe('Contact details of developers', () => {
   });
 
   it('it should not register a user with incomplete details', (done) => {
-    // HTTP POST -> DONT REGISTER A NEW USER
+    // HTTP POST -> DONT REGISTER A NEW CONTACT
     const userDetails = {
       fullname: 'Jeremiah Fred',
       username: '',
@@ -48,7 +48,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should register a new user', (done) => {
-    // HTTP POST -> REGISTER A NEW USER
+    // HTTP POST -> REGISTER A NEW CONTACT
     const userDetails = {
       fullname: 'Amaka Mgbe',
       username: 'dinma1',
@@ -69,10 +69,10 @@ describe('Contact details of developers', () => {
         expect(res.body.message).to.equal('signed up successfully');
         done();
       });
-  }).timeout(5000);
+  }).timeout(50000);
 
   it('should register a new user', (done) => {
-    // HTTP POST -> REGISTER A NEW USER
+    // HTTP POST -> REGISTER A NEW CONTACT
     const userDetails = {
       fullname: 'Amaka Mgbe',
       username: 'dinma1',
@@ -96,7 +96,7 @@ describe('Contact details of developers', () => {
 
 
   it('should not get a user that does not exist', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .get('/api/users/66')
       .end((err, res) => {
@@ -107,7 +107,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should get a user that exist', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .get('/api/users/1')
       .end((err, res) => {
@@ -118,7 +118,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should get all users that exist', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .get('/api/users')
       .end((err, res) => {
@@ -128,10 +128,8 @@ describe('Contact details of developers', () => {
       });
   });
 
-
-
   it('it should not update user details if user doesnt exist', (done) => {
-    // HTTP PUT -> DON'T UPDATE A BUSINESS
+    // HTTP PUT -> DON'T UPDATE A CONTACT
     chai.request(app)
       .put('/api/users/21')
       .send({
@@ -150,7 +148,7 @@ describe('Contact details of developers', () => {
   });
 
   it('it should update user details', (done) => {
-    // HTTP PUT -> DON'T UPDATE A BUSINESS
+    // HTTP PUT -> DON'T UPDATE A CONTACT
     chai.request(app)
       .put('/api/users/1')
       .send({
@@ -170,7 +168,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should delete a user that exist', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .delete('/api/users/1')
       .end((err, res) => {
@@ -181,7 +179,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should not delete a user that does not exist', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .delete('/api/users/34')
       .end((err, res) => {
@@ -192,7 +190,7 @@ describe('Contact details of developers', () => {
   });
 
   it('should not get any contact', (done) => {
-    // HTTP POST -> DONT GET A USER
+    // HTTP POST -> DONT GET A CONTACT
     chai.request(app)
       .get('/api/users')
       .end((err, res) => {

@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+let dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -10,7 +10,9 @@ module.exports = {
   test: {
     use_env_variable: 'TEST_DATABASE_URL',
     dialect: 'postgres',
+  },
+  production: {
+    use_env_variable: 'DATABASE_URL',
+    dialect: 'postgres'
   }
 };
-
-// module.exports = config[process.env.NODE_ENV || 'development'];

@@ -9,6 +9,11 @@ app.use(bodyParser.json());
 app.use (bodyParser.urlencoded({ extended: false }));
 app.use('/api', routes);
 
+
+app.get('/', (req, res) => res.status(200).send({
+  message: 'Welcome! create your profile or checkout out developers',
+}));
+
 app.use((res, req, next) => {
 const error = new Error('oops! not found');
 error.status = 404;
@@ -24,10 +29,6 @@ app.use((err, req, res, next) => {
     }
   });
 });
-
-app.get('/', (req, res) => res.status(200).send({
-  message: 'Welcome! create your profile or checkout out developers',
-}));
 
 const server = app.listen(process.env.PORT || 3000, () => {
     // eslint-disable-next-line no-console
