@@ -10,7 +10,7 @@ class ContactController {
     /**
      * class for creating the contact details
      */
-   static createContact(req, res) {
+   static createContact(req, res, next) {
        const {
            username,
            password, 
@@ -39,7 +39,7 @@ class ContactController {
                email: newUser.email,
                category: newUser.category
            }
-           return res.status(201).json({
+            res.status(201).json({
                message: 'signed up successfully',
                user
                
