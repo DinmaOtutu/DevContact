@@ -34,6 +34,7 @@ class ContactController {
            username, fullname, email, category, password: hashSync(password, 10)
        }).then((newUser) => {
            const user = {
+               id: newUser.id,
                fullname: newUser.fullname,
                email: newUser.email,
                category: newUser.category
@@ -58,6 +59,7 @@ class ContactController {
              })
          }
          const allContacts = contacts.map(contact => ({
+             id: contact.id,
              fullname: contact.fullname,
              email: contact.email,
              category: contact.category,
@@ -73,6 +75,30 @@ class ContactController {
        })
    })
    }
+
+  static deleteContact(req, res) {
+      const { id } = req.params;
+      Contacts.findOne({
+          where: {
+              id,
+          }
+      }).then((contact) => {
+          if(!contact) {
+              return res.status(404).json({
+                  message: 'contact not found'
+              })
+          }
+          contact.destroy().then(deletedContact => {
+              return res.status(200).json({
+                  message: 'contact successfully deleted'
+              })
+          }).catch((error) => {
+              return res.status(400).json({
+                  error: error.message
+              })
+          })
+      })
+  }
  }
 
 export default ContactController;
