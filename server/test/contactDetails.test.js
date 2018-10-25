@@ -4,6 +4,7 @@ import app from '../../index';
 // import testData from './Data';
 
 chai.use(chaiHttp);
+const should = chai.should();
 
 describe('Contact details of developers', () => {
   it('should not register a user with password mismatch', (done) => {
@@ -61,7 +62,7 @@ describe('Contact details of developers', () => {
       .send(userDetails)
       .end((err, res) => {
         console.log(res, 'here i am bitchhh')
-        expect(res).to.have.status(201);
+        res.should.have.property('status',201);
         expect(res.body).to.have.property('message')
         expect(res.body).to.have.property('user')
         expect(res.body.message).to.equal('signed up successfully');
