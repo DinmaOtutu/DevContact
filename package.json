@@ -4,7 +4,8 @@
   "description": "node",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test nyc --reporter=html mocha --require babel-core/register server/test/**/*.test.js --exit && nyc report --timeout 10000",
+    "pretest": "cross-env NODE_ENV=test npm run undo:migrations && npm run migrations",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html mocha --require babel-core/register server/test/**/*.test.js --exit && nyc report --timeout 1000000",
     "start": "nodemon index.js --exec babel-node",
     "undo:migrations": "node_modules/.bin/sequelize db:migrate:undo:all",
     "migrations": "node_modules/.bin/sequelize db:migrate",
