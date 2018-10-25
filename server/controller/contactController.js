@@ -139,6 +139,35 @@ class ContactController {
             })
         });
     })}
+
+    static singleContact(req, res) {
+        const { id } = req.params;
+        Contacts.findOne({
+            where: {
+                id,
+            }
+        }).then((contact) => {
+            if(!contact) {
+                return res.status(404).json({
+                    message: 'contact not found'
+                })
+            }
+            const user = {
+                id: contact.id,
+                fullname: contact.fullname,
+                email: contact.email,
+                category: contact.category
+            }
+            return res.status(200).json({
+                message: 'contact found successfully',
+                user
+            });
+        }).catch((error) => {
+            return res.status(400).json({
+                message: error.message
+            })
+        });
+    }
 }
 
 export default ContactController;
