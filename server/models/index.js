@@ -9,8 +9,6 @@ dotenv.config();
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development'; // Use development if no environment is specified
 const config = configJson[env];
-console.log(config, '===============')
-
 const db = {};
 let sequelize;
 
