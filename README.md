@@ -23,7 +23,7 @@ Allow CRUD operation for developers where they can create, view, update and dele
 API is deployed at [https://developer-contacts.herokuapp.com/](https://developer-contacts.herokuapp.com/)
 
 ### Documentation
-Documentation is hosted at [https://ride-my-way-cars.herokuapp.com/api/v1/docs](https://ride-my-way-cars.herokuapp.com/api/v1/docs)
+Documentation is hosted at [https://documenter.getpostman.com/view/4552812/RWgxvFuV](https://documenter.getpostman.com/view/4552812/RWgxvFuV)
 
 
 # Technologies Used
